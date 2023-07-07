@@ -67,17 +67,20 @@
 
 $$d(A,B)$$
 
+\begin{scriptsize}
 
 is the quantification of 
 
 \begin{itemize}
-\item   «the quantity of 1D-space» between A and B , a \alert{length}, in meters
-\item «similarity» between A and B, a \alert{metric} $\in \mathbb{R}$
+\item   «the quantity of 1D-space» between A and B , a \alert{"length"}, in something like meters
+\item «similarity» between A and B, a \alert{metric} $\in \mathbb{R}$, sometimes $\in[0;1]$
 \item  «quantity of separation» , as in the \alert{social distance} between two people in termes of classes  
 \end{itemize}
 
 
-$A,B$ may be sets ...
+$A,B$ may be sets, vectors in $\mathbb{R}^n$, doubles and strings and booleans
+
+\end{scriptsize}
 
 \end{frame}
 
@@ -90,8 +93,8 @@ $A,B$ may be sets ...
 \item  Physical Length : Geometry, Physics, Mecanics
 \item  Error function :  Statistical model fitting 
 \item  Fitness function : Genetic Algorithm
-\item  Loss function : Machine Learning
-\item  Edit distance : Natural Language Processing
+\item  Loss function : Machine Learning, Classification 
+\item  Edit distance : Natural Language Processing, Info. Retrieval 
 \item  Paths Lengths:  Graph theory, Optics, Acoustics
 \item  Likelyhood : Probabilities 
 \end{itemize}
@@ -114,6 +117,8 @@ Due to \alert{curse of dimensionality}, there is no good distance in a high dime
 \begin{frame}{Euclidean}
 
 $$d(A,B)= \sqrt{\sum_{i}(A_i-B_i)^2} \in \mathbb{R}$$
+
+\begin{scriptsize}
 
 Requires \alert{cartesian coordinates} 
 
@@ -144,7 +149,7 @@ Requires \alert{cartesian coordinates}
 
 
 toy example : k-means on 2D points 
-
+\end{scriptsize}
 
 \end{frame}
 
@@ -162,7 +167,7 @@ $$d(A,B)= \sum_{i}|A_i-B_i| \in \mathbb{R}$$
 \begin{block}{Pros}
 \begin{itemize}
   \item ok with high-dimensional data
-  \item perfectily understandable if 1D ;-)
+  \item perfectly understandable if 1D ;-)
 \end{itemize}
 \end{block}
 \column{0.4\textwidth}
@@ -205,7 +210,7 @@ $$d(A,B)= max_i |A_i-B_i| \in \mathbb{R}$$
 \begin{block}{Cons}
 \begin{spacing}{0.9}
 \begin{itemize}
-  \item 
+  \item  other dimension than the one where max occurs don't count 
   \item hard to interpret
 \end{itemize}
 \end{spacing}
@@ -239,7 +244,7 @@ $p = \infty$ : Chebyshev
 \column{0.48\textwidth}
 \begin{block}{Pros}
 \begin{itemize}
-  \item tunable with $p$ 
+  \item tunable with $p$ $\approx$ meta-parameters if used in model
 \end{itemize}
 \end{block}
 \column{0.4\textwidth}
@@ -340,6 +345,75 @@ $\varphi$ is latitude , $\lambda$ is longitude, $r$ is the sphere radius.
 \section{Distance as Similarity}
 
 
+\begin{frame}{Pearson'(s correlation)}
+
+
+$$d(A,B)= \frac{cov(A,B)}{\sigma_A\sigma_B}=\frac{E\big[(A-E(A))(B-E(B))  \big]}{\sigma_A\sigma_B}$$ 
+
+
+
+\begin{scriptsize}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Pros}
+\begin{itemize}
+  \item very common
+  \item normalised values $\in [-1;1]$
+  \item used for high-dimensional data
+\end{itemize}
+\end{block}
+\column{0.4\textwidth}
+\metroset{block=fill}
+\begin{block}{Cons}
+\begin{spacing}{0.9}
+\begin{itemize}
+  \item captures "linearity" amount
+  \end{itemize}
+\end{spacing}
+\end{block}
+\end{columns}
+\end{scriptsize}
+
+\end{frame}
+
+
+\section{Distance as Similarity}
+
+
+\begin{frame}{Spearman's correlation}
+
+
+$$d(A,B)= \frac{cov(rank_A, rank_B)}{\sigma_{rank_A}\sigma_{rank_B}}$$
+
+
+Pearson on ranks 
+
+\begin{scriptsize}
+\begin{columns}[T,onlytextwidth]
+\column{0.48\textwidth}
+\begin{block}{Pros}
+\begin{itemize}
+  \item normalised values $\in [-1;1]$
+  \item ok with monotonous trends
+\end{itemize}
+\end{block}
+\column{0.4\textwidth}
+\metroset{block=fill}
+\begin{block}{Cons}
+\begin{spacing}{0.9}
+\begin{itemize}
+  \item less known/used than Pearson 
+  \end{itemize}
+\end{spacing}
+\end{block}
+\end{columns}
+\end{scriptsize}
+
+\end{frame}
+
+
+
+
 \begin{frame}{Cosine similarity}
 
 $$d(A,B)= cos(\theta)= \frac{A.B}{||A||.||B||} \in[-1;1]$$
@@ -384,13 +458,14 @@ $$d(A,B)= Card\{i : A_i \neq B_i\}$$
 \includegraphics[width=0.5\textwidth,keepaspectratio]{img/hamming.png}
 \end{center}
 
+\begin{scriptsize}
 The number of values that differ from A to B.
 
 
 Requires \alert{same length} objects
 
 
-\begin{scriptsize}
+
 \begin{columns}[T,onlytextwidth]
 \column{0.48\textwidth}
 \begin{block}{Pros}
@@ -427,13 +502,13 @@ $$d(A,B)= 1-\frac{A \cap B}{A \cup B} \in [0;1]$$
 \end{center}
 
 
+\begin{scriptsize}
 also called \alert{IOU}
 
 Distance is 1- Jaccard index
 
 
 
-\begin{scriptsize}
 \begin{columns}[T,onlytextwidth]
 \column{0.48\textwidth}
 \begin{block}{Pros}
@@ -577,9 +652,12 @@ doi: 10.3389/fpsyg.2019.01089
 \begin{frame}{Références}
 
 
+TODO 
+
 \begin{itemize}
 \item \href{https://towardsdatascience.com/9-distance-measures-in-data-science-918109d069fa}{\color{cyan}{Initial blog post on Towards Data Science}}
-%\item \href{https://www.ijamtes.org/gallery/101.%20nov%20ijmte%20-%20as.pdf}{\color{cyan}{Goswami et al, A Comparative Analysis of Similarity Measures to find Coherent Documents}}
+\item \href{https://www.ijamtes.org/gallery/101.\%20nov\%20ijmte\%20-\%20as.pdf}{\color{cyan}{Goswami et al, A Comparative Analysis of Similarity Measures to find Coherent Documents}}
+
 \end{itemize}
 
 
