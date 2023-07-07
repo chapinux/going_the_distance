@@ -1,0 +1,3 @@
+\beamer@sectionintoc {1}{Going the distance}{2}{0}{1}
+\beamer@sectionintoc {2}{Distance as Physical Length}{6}{0}{2}
+\beamer@sectionintoc {3}{Distance as Similarity}{13}{0}{3}
